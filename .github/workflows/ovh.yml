@@ -19,4 +19,5 @@ jobs:
       with:
         ftp-server: ftp.cluster029.hosting.ovh.net
         ftp-username: indacofrue
+        local-dir: www/ 
         ftp-password: ${{ secrets.FTP_PASSWORD }}
