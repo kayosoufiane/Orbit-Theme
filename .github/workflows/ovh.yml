@@ -1,10 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Publish Website
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   FTP-Deploy-Action:
@@ -12,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-      with:
-        fetch-depth: 2
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.0.0
-      with:
-        ftp-server: ftps://ftp.samkirkland.com:21/www/
-        ftp-username: indacofrue
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
+       with:
+        FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        ARGS: --delete --transfer-all
